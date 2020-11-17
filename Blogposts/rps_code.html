@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width">
     <title>Aryan Panwar</title>
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="1.css">
   </head>
-  <body>
+  <body class="body">
     <header class="text-gray-500 bg-gray-900 body-font">
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
@@ -25,34 +26,232 @@
   </div>
 </header>
     <hr>
-    <section class="text-gray-500 bg-gray-900 body-font">
-  <div class="container px-5 py-24 mx-auto flex flex-col">
-    <div class="lg:w-4/6 mx-auto">
-      <div class="rounded-lg h-64 overflow-hidden">
-        <img alt="content" class="object-cover object-center h-full w-full" src="Blogpics/post 3 pic1.jpg">
-      </div>
-      <div class="flex flex-col sm:flex-row mt-10">
-        <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
-          <div class="w-20 h-20 rounded-full inline-flex items-center justify-center bg-gray-800 text-gray-600">
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10" viewBox="0 0 24 24">
-              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
-              <circle cx="12" cy="7" r="4"></circle>
-            </svg>
-          </div>
-          <div class="flex flex-col items-center text-center justify-center">
-            <h2 class="font-medium title-font mt-4 text-white text-lg">Mark Zuckerberg</h2>
-            <div class="w-12 h-1 bg-red-500 rounded mt-2 mb-4"></div>
-            <p class="text-base text-gray-600">CEO and owner of Facebook Inc.</p>
-          </div>
-        </div>
-        <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-800 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-          <p class="leading-relaxed text-lg mb-4">Facebook CEO Mark Zuckerberg said that with UPI, India has created something "truly special" and is opening up a world of opportunities for micro and small businesses that are the backbone of the Indian economy.The National Payments Corporation of India (NPCI), India’s flagship payments processor, on November 5 allowed WhatsApp to go live on UPI.WhatsApp can expand its UPI base in a graded manner starting with a maximum number of registered users at 20 million, the NPCI said in a statement."India is the first country to do anything like this. I am glad we were able to support this effort and work together to help achieve a more digital India. I want to thank all our partners who have made this possible,"</p>
-        </div>
-      </div>
+    <h1 class="heading1">Code : </h1>
+    <div class="code-cont">
+      <h1 class="code">
+        <a class="white-p">
+# SINGLE PLAYER DONE
+# MULTI PLAYER TO BE COMPLETED
+import pygame
+import sys
+import random
+from pygame.locals import *
+
+pygame.init()
+
+clock = pygame.time.Clock()
+font = pygame.font.SysFont(None, 55)
+white = [255,255,255]
+black = [0,0,0]
+green = [0,255,0]
+
+def choose_figure():
+
+    num = random.randrange(1,4)
+
+    if num == 1:
+
+        num = "ROCK"
+
+    elif num == 2:
+
+        num = "PAPER"
+
+    else:
+
+        num = "SCISSORS"
+
+    return num
+
+def welcome():
+
+    DISPLAYSURF.fill(white)
+
+    text_screen("WELCOME TO ROCK PAPER SCISSORS",black,80,50)
+
+    text_screen("You can play :" , black , 330,150 )
+
+    # SINGLE PLAYER
+
+    pygame.draw.rect(DISPLAYSURF,green,(270,270 , 350,90))
+
+    text_screen("SINGLE PLAYER",black,300,300)
+
+    # MULTIPLAYER
+
+    pygame.draw.rect(DISPLAYSURF,green,(270,420 , 350,90))
+
+    text_screen("MULTI-PLAYER",black,300,450)
+
+    update()
+
+    while True:
+
+        for event in pygame.event.get():
+
+            if event.type == QUIT:
+
+                pygame.quit()
+                sys.exit()
+
+            if event.type == MOUSEBUTTONDOWN:
+
+                pos = pygame.mouse.get_pos()
+
+                x = pos[0]
+                y = pos[1]
+
+                if x >= 270 and x <= 620 and y >= 270 and y <= 360:
+
+                    gameloop()
+
+def recreate():
+
+    DISPLAYSURF.fill(white)
+
+    # BACK BUTTON
+
+    text_screen("BACK",black,10,10)
+
+    # ROCK BUTTON
+
+    pygame.draw.rect(DISPLAYSURF,green,(680,470 , 170,90))
+
+    text_screen("ROCK",black,710,500)
+
+    # PAPER BUTTON
+
+    pygame.draw.rect(DISPLAYSURF,green,(480,470 , 185,90))
+
+    text_screen("PAPER",black,510,500)
+
+    # SCISSORS BUTTON
+
+    pygame.draw.rect(DISPLAYSURF,green,(230,470 , 235,90))
+
+    text_screen("SCISSOR",black,260,500)
+
+    update()
+
+
+def gameloop():
+
+    recreate()
+
+    while True:
+
+        for event in pygame.event.get():
+
+            if event.type == QUIT:
+
+                pygame.quit()
+                sys.exit()
+
+            if event.type == MOUSEBUTTONDOWN:
+
+                pos = pygame.mouse.get_pos()
+
+                x = pos[0]
+                y = pos[1]
+
+                if x >= 230 and x <=  470 and y >= 470 and y <= 550 :
+
+                    recreate()
+
+                    text_screen("SCISSORS" , black , 590,250)
+
+                    num = choose_figure()
+
+                    text_screen(num , black , 100,250)
+
+                    if num == "ROCK":
+
+
+                        text_screen("LOST",black , 400,250)
+
+                    elif num == "PAPER":
+
+                        text_screen("WON" , black , 400,250)
+
+                    else:
+
+                        text_screen("TIE" , black , 400,250)
+
+
+
+
+
+
+                elif x >= 480 and x <=  670 and y >= 470 and y <= 550 :
+
+                    recreate()
+
+                    text_screen("PAPER" , black , 590,250)
+
+                    num = choose_figure()
+
+                    text_screen(num , black , 100,250)
+
+                    if num == "ROCK":
+
+
+                        text_screen("WON",black , 400,250)
+
+                    elif num == "PAPER":
+
+                        text_screen("TIE" , black , 400,250)
+
+                    else:
+
+                        text_screen("LOST" , black , 400,250)
+
+                elif x >= 680 and x <=  870 and y >= 470 and y <= 550 :
+
+                    recreate()
+
+                    text_screen("ROCK" , black , 590,250)
+
+                    num = choose_figure()
+
+                    text_screen(num , black , 100,250)
+
+                    if num == "ROCK":
+
+
+                        text_screen("TIE",black , 400,250)
+
+                    elif num == "PAPER":
+
+                        text_screen("LOST" , black , 400,250)
+
+                    else:
+
+                        text_screen("WON" , black , 400,250)
+
+                elif x>=0 and x <= 120 and y >= 0 and y <= 45:
+
+                    welcome()
+
+def text_screen(text, color, x, y):
+    screen_text = font.render(text, True , color)
+    DISPLAYSURF.blit(screen_text, [x,y])
+    update()
+
+
+def update():
+
+    pygame.display.update()
+
+DISPLAYSURF = pygame.display.set_mode((900,600))
+pygame.display.set_caption("ROCK PAPER SCISSORS")
+
+welcome()
+
+update()
+        </a>
+      </h1>
     </div>
-  </div>
-</section>
-    <hr>
+    <br><br><br><br><hr>
 <footer class="text-gray-500 bg-gray-900 body-font">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-wrap md:text-left text-center order-first">
